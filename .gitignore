@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+*.egg-info/
+dist/
+build/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+faculty_hub.db
+
+# Environment
+.env
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+.pnpm-debug.log
+
+# Build
+frontend/build/
+frontend/dist/
+
+# IDE
+.vscode/*
+!.vscode/launch.json
+.idea/
+*.swp
+*.swo
+
+# Playwright
+playwright-report/
+test-results/

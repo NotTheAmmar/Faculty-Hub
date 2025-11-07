@@ -1,0 +1,6 @@
+name,title,department,office_location,email,linkedin_url,google_scholar_url,headline
+Dr. John Doe,Professor,Computer Science,Building A Room 305,john.doe@university.edu,https://linkedin.com/in/johndoe,https://scholar.google.com/citations?user=ABC123,AI and Machine Learning Researcher
+Dr. Jane Smith,Associate Professor,Electrical Engineering,Building B Room 201,jane.smith@university.edu,https://linkedin.com/in/janesmith,https://scholar.google.com/citations?user=XYZ456,Power Systems and Renewable Energy Expert
+Dr. Robert Johnson,Assistant Professor,Mechanical Engineering,Building C Room 410,robert.johnson@university.edu,https://linkedin.com/in/robertj,https://scholar.google.com/citations?user=DEF789,Robotics and Automation Specialist
+Dr. Emily Davis,Professor,Chemistry,Building D Room 502,emily.davis@university.edu,https://linkedin.com/in/emilyd,https://scholar.google.com/citations?user=GHI012,Organic Chemistry and Drug Discovery
+Dr. Michael Brown,Associate Professor,Physics,Building E Room 301,michael.brown@university.edu,https://linkedin.com/in/michaelb,https://scholar.google.com/citations?user=JKL345,Quantum Computing and Photonics
