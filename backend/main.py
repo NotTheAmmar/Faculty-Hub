@@ -42,7 +42,7 @@ def format_faculty_response(faculty_data: dict) -> dict:
     return {
         "id": faculty_data["id"],
         "name": faculty_data["name"],
-        "title": faculty_data["title"],
+        "designation": faculty_data["designation"],
         "department": faculty_data["department"],
         "office_location": faculty_data["office_location"],
         "email": faculty_data["email"],
@@ -65,7 +65,7 @@ async def background_scrape_and_update(faculty_id: int, linkedin_url: str, schol
         if faculty:
             update_data = {
                 "name": faculty["name"],
-                "title": faculty["title"],
+                "designation": faculty["designation"],
                 "department": faculty["department"],
                 "office_location": faculty["office_location"],
                 "email": faculty["email"],
@@ -104,7 +104,7 @@ async def scrape_preview(
 async def create_new_faculty(faculty: FacultyUpdate, admin=Depends(verify_token)):
     faculty_data = {
         "name": faculty.name,
-        "title": faculty.title,
+        "designation": faculty.designation,
         "department": faculty.department,
         "office_location": faculty.office_location,
         "email": faculty.email,
@@ -135,7 +135,7 @@ async def update_existing_faculty(
     
     faculty_data = {
         "name": faculty.name,
-        "title": faculty.title,
+        "designation": faculty.designation,
         "department": faculty.department,
         "office_location": faculty.office_location,
         "email": faculty.email,

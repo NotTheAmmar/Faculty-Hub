@@ -84,7 +84,7 @@ function AdminDashboard() {
             <div key={member.id} className="faculty-list-item">
               <div>
                 <h3>{member.name}</h3>
-                <p>{member.title} - {member.department}</p>
+                <p>{member.designation || 'No designation'} - {member.department || 'No department'}</p>
               </div>
               <div className="faculty-list-item-actions">
                 <button onClick={() => handleEdit(member)} className="btn btn-secondary">

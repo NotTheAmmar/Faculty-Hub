@@ -23,7 +23,7 @@ class Publication(BaseModel):
 
 class FacultyBase(BaseModel):
     name: str
-    title: Optional[str] = None
+    designation: Optional[str] = None
     department: Optional[str] = None
     office_location: Optional[str] = None
     email: Optional[EmailStr] = None

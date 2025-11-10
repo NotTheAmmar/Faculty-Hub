@@ -2,6 +2,8 @@
 
 A web portal that helps students in large academic institutions find and connect with the right faculty members for mentorship, projects, or academic advice.
 
+> **⚠️ Important for Existing Users**: If you're updating from a previous version, please run the database migration script. See [MIGRATION_GUIDE.md](MIGRATION_GUIDE.md) for details.
+
 ## Features
 
 ### Student-Facing
@@ -157,7 +159,7 @@ To bulk import faculty members, create a CSV file with the following columns:
 - `name` - Faculty full name (required)
 
 ### Optional Columns
-- `title` - Academic title (e.g., "Professor", "Associate Professor")
+- `designation` (or `title`) - Academic designation (e.g., "Professor", "Associate Professor")
 - `department` - Department name (e.g., "Computer Science")
 - `office_location` - Office location (e.g., "Building A, Room 305")
 - `email` - Email address
@@ -165,24 +167,40 @@ To bulk import faculty members, create a CSV file with the following columns:
 - `google_scholar_url` - Full Google Scholar profile URL
 - `headline` - Professional headline/tagline
 - `profile_picture_url` - URL to profile picture
+- `experience` - Work experience (format: Position|Company|Duration; use semicolon for multiple entries)
+- `projects` - Projects (format: Title|Description; use semicolon for multiple entries)
+- `certifications` - Certifications (format: Name|Issuer; use semicolon for multiple entries)
 
 ### CSV Template Example
 
 ```csv
-name,title,department,office_location,email,linkedin_url,google_scholar_url,headline
-Dr. John Doe,Professor,Computer Science,Building A Room 305,john.doe@university.edu,https://linkedin.com/in/johndoe,https://scholar.google.com/citations?user=ABC123,AI and Machine Learning Researcher
-Dr. Jane Smith,Associate Professor,Electrical Engineering,Building B Room 201,jane.smith@university.edu,https://linkedin.com/in/janesmith,https://scholar.google.com/citations?user=XYZ456,Power Systems and Renewable Energy Expert
-Dr. Robert Johnson,Assistant Professor,Mechanical Engineering,Building C Room 410,robert.johnson@university.edu,https://linkedin.com/in/robertj,https://scholar.google.com/citations?user=DEF789,Robotics and Automation Specialist
+name,designation,department,office_location,email,linkedin_url,google_scholar_url,headline,profile_picture_url,experience,projects,certifications
+Dr. John Doe,Professor,Computer Science,Building A Room 305,john.doe@university.edu,https://linkedin.com/in/johndoe,https://scholar.google.com/citations?user=ABC123,AI and Machine Learning Researcher,https://example.com/john.jpg,Professor|MIT|2015-Present;Associate Professor|Stanford|2010-2015,AI Research Platform|ML framework;Smart Grid|IoT system,AWS Solutions Architect|Amazon;PMP|PMI
+Dr. Jane Smith,Associate Professor,Electrical Engineering,Building B Room 201,jane.smith@university.edu,https://linkedin.com/in/janesmith,https://scholar.google.com/citations?user=XYZ456,Power Systems Expert,https://example.com/jane.jpg,Associate Professor|Harvard|2018-Present,Renewable Energy Grid|Smart grid tech,IEEE Senior Member|IEEE
 ```
+
+### CSV Format Details
+
+**Experience Format**: `Position|Company|Duration;Position|Company|Duration`
+- Example: `Professor|MIT|2015-Present;Associate Professor|Stanford|2010-2015`
+
+**Projects Format**: `Title|Description;Title|Description`
+- Example: `AI Research Platform|Machine learning framework;Smart Grid|IoT energy system`
+
+**Certifications Format**: `Name|Issuer;Name|Issuer`
+- Example: `AWS Solutions Architect|Amazon;PMP Certification|PMI`
 
 ### CSV Import Notes
 
 - The CSV file must include a header row with column names
 - Only the `name` field is required; all other fields are optional
 - You can download a template from the Admin Dashboard
-- A sample file `sample_faculty_import.csv` is included in the project root
-- The import will create basic faculty profiles
-- After import, you can edit individual profiles to add experience, projects, and certifications
+- A sample file `sample_faculty_import.csv` is included in the project root with complete LinkedIn data examples
+- **New**: CSV now supports importing experience, projects, and certifications directly
+- Use pipe `|` to separate fields within an entry, semicolon `;` to separate multiple entries
+- See [CSV_IMPORT_GUIDE.md](CSV_IMPORT_GUIDE.md) for detailed format specifications and examples
+- The import will create complete faculty profiles with all LinkedIn data
+- After import, you can edit individual profiles to modify any data
 - Invalid or duplicate entries will be skipped with a notification
 
 ## Project Structure

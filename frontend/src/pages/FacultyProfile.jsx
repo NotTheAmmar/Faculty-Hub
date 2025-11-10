@@ -50,7 +50,7 @@ function FacultyProfile() {
           )}
           <div className="profile-info">
             <h1>{faculty.name}</h1>
-            <p><strong>{faculty.title}</strong></p>
+            <p><strong>{faculty.designation}</strong></p>
             <p>{faculty.department}</p>
             {faculty.office_location && <p>📍 {faculty.office_location}</p>}
             {faculty.email && <p>📧 {faculty.email}</p>}

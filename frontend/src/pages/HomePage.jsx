@@ -70,7 +70,7 @@ function HomePage() {
                 <img src={member.profile_picture_url} alt={member.name} />
               )}
               <h3>{member.name}</h3>
-              <p><strong>{member.title}</strong></p>
+              <p><strong>{member.designation}</strong></p>
               <p>{member.department}</p>
               {member.headline && <p style={{ marginTop: '8px', fontSize: '14px' }}>{member.headline}</p>}
             </Link>

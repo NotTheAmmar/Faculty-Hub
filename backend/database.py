@@ -13,7 +13,7 @@ def init_db():
         CREATE TABLE IF NOT EXISTS faculty (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL,
-            title TEXT,
+            designation TEXT,
             department TEXT,
             office_location TEXT,
             email TEXT,
@@ -43,14 +43,14 @@ def create_faculty(data: Dict[str, Any]) -> int:
     
     cursor.execute("""
         INSERT INTO faculty (
-            name, title, department, office_location, email,
+            name, designation, department, office_location, email,
             google_scholar_url, linkedin_url, profile_picture_url,
             headline, experience, certifications, projects,
             publications, last_updated
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     """, (
         data.get('name'),
-        data.get('title'),
+        data.get('designation'),
         data.get('department'),
         data.get('office_location'),
         data.get('email'),
@@ -98,7 +98,7 @@ def update_faculty(faculty_id: int, data: Dict[str, Any]) -> bool:
     
     cursor.execute("""
         UPDATE faculty SET
-            name = ?, title = ?, department = ?, office_location = ?,
+            name = ?, designation = ?, department = ?, office_location = ?,
             email = ?, google_scholar_url = ?, linkedin_url = ?,
             profile_picture_url = ?, headline = ?, experience = ?,
             certifications = ?, projects = ?, publications = ?,
@@ -106,7 +106,7 @@ def update_faculty(faculty_id: int, data: Dict[str, Any]) -> bool:
         WHERE id = ?
     """, (
         data.get('name'),
-        data.get('title'),
+        data.get('designation'),
         data.get('department'),
         data.get('office_location'),
         data.get('email'),
@@ -145,7 +145,7 @@ def search_faculty(query: str) -> List[Dict[str, Any]]:
     search_pattern = f"%{query}%"
     cursor.execute("""
         SELECT * FROM faculty
-        WHERE name LIKE ? OR department LIKE ? OR title LIKE ?
+        WHERE name LIKE ? OR department LIKE ? OR designation LIKE ?
            OR headline LIKE ? OR experience LIKE ? OR projects LIKE ?
            OR publications LIKE ?
         ORDER BY name

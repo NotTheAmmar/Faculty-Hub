@@ -51,7 +51,8 @@ function CSVImport({ onClose, onSuccess }) {
             faculty.name = value
             break
           case 'title':
-            faculty.title = value
+          case 'designation':
+            faculty.designation = value
             break
           case 'department':
             faculty.department = value
@@ -80,13 +81,47 @@ function CSVImport({ onClose, onSuccess }) {
           case 'photo_url':
             faculty.profile_picture_url = value
             break
+          case 'experience':
+            if (value) {
+              faculty.experience = value.split(';').map(exp => {
+                const parts = exp.split('|').map(p => p.trim())
+                return {
+                  position: parts[0] || '',
+                  company: parts[1] || '',
+                  duration: parts[2] || null
+                }
+              })
+            }
+            break
+          case 'projects':
+            if (value) {
+              faculty.projects = value.split(';').map(proj => {
+                const parts = proj.split('|').map(p => p.trim())
+                return {
+                  title: parts[0] || '',
+                  description: parts[1] || null
+                }
+              })
+            }
+            break
+          case 'certifications':
+            if (value) {
+              faculty.certifications = value.split(';').map(cert => {
+                const parts = cert.split('|').map(p => p.trim())
+                return {
+                  name: parts[0] || '',
+                  issuer: parts[1] || null
+                }
+              })
+            }
+            break
         }
       })
 
       if (faculty.name) {
-        faculty.experience = []
-        faculty.certifications = []
-        faculty.projects = []
+        faculty.experience = faculty.experience || []
+        faculty.certifications = faculty.certifications || []
+        faculty.projects = faculty.projects || []
         faculty.publications = []
         facultyList.push(faculty)
       }
@@ -140,9 +175,9 @@ function CSVImport({ onClose, onSuccess }) {
   }
 
   const downloadTemplate = () => {
-    const template = `name,title,department,office_location,email,linkedin_url,google_scholar_url,headline
-Dr. John Doe,Professor,Computer Science,Building A Room 305,john.doe@university.edu,https://linkedin.com/in/johndoe,https://scholar.google.com/citations?user=ABC123,AI and Machine Learning Researcher
-Dr. Jane Smith,Associate Professor,Electrical Engineering,Building B Room 201,jane.smith@university.edu,https://linkedin.com/in/janesmith,https://scholar.google.com/citations?user=XYZ456,Power Systems and Renewable Energy Expert`
+    const template = `name,designation,department,office_location,email,linkedin_url,google_scholar_url,headline,profile_picture_url,experience,projects,certifications
+Dr. John Doe,Professor,Computer Science,Building A Room 305,john.doe@university.edu,https://linkedin.com/in/johndoe,https://scholar.google.com/citations?user=ABC123,AI and Machine Learning Researcher,https://example.com/john.jpg,Professor|MIT|2015-Present;Associate Professor|Stanford|2010-2015,AI Research Platform|Machine learning framework;Smart Grid|IoT energy system,AWS Solutions Architect|Amazon;PMP|PMI
+Dr. Jane Smith,Associate Professor,Electrical Engineering,Building B Room 201,jane.smith@university.edu,https://linkedin.com/in/janesmith,https://scholar.google.com/citations?user=XYZ456,Power Systems and Renewable Energy Expert,https://example.com/jane.jpg,Associate Professor|Harvard|2018-Present,Renewable Energy Grid|Smart grid technology,IEEE Senior Member|IEEE`
 
     const blob = new Blob([template], { type: 'text/csv' })
     const url = window.URL.createObjectURL(blob)

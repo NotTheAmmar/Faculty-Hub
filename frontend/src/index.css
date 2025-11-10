@@ -151,17 +151,20 @@ body {
 }
 
 .form-group input,
-.form-group textarea {
+.form-group textarea,
+.form-group select {
   width: 100%;
   padding: 10px 12px;
   font-size: 14px;
   border: 1px solid #ddd;
   border-radius: 4px;
   outline: none;
+  background-color: white;
 }
 
 .form-group input:focus,
-.form-group textarea:focus {
+.form-group textarea:focus,
+.form-group select:focus {
   border-color: #1976d2;
 }
 

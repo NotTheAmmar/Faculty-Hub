@@ -2,9 +2,38 @@ import { useState, useEffect } from 'react'
 import { adminAPI } from '../api'
 
 function FacultyForm({ faculty, onClose, onSave }) {
+  const designationOptions = [
+    'Assistant Professor',
+    'Associate Professor', 
+    'Professor',
+    'Head of Department',
+    'Lab Attendant',
+    'Research Scholar',
+    'Visiting Professor',
+    'Emeritus Professor',
+    'Lecturer',
+    'Senior Lecturer'
+  ]
+
+  const departmentOptions = [
+    'Computer Science',
+    'Mechanical Engineering',
+    'Civil Engineering',
+    'Electrical Engineering',
+    'Electronics and Communication',
+    'Information Technology',
+    'Chemical Engineering',
+    'Biotechnology',
+    'Mathematics',
+    'Physics',
+    'Chemistry',
+    'Management Studies',
+    'Humanities'
+  ]
+
   const [formData, setFormData] = useState({
     name: '',
-    title: '',
+    designation: '',
     department: '',
     office_location: '',
     email: '',
@@ -21,7 +50,7 @@ function FacultyForm({ faculty, onClose, onSave }) {
     if (faculty) {
       setFormData({
         name: faculty.name || '',
-        title: faculty.title || '',
+        designation: faculty.designation || '',
         department: faculty.department || '',
         office_location: faculty.office_location || '',
         email: faculty.email || '',
@@ -108,23 +137,31 @@ function FacultyForm({ faculty, onClose, onSave }) {
           </div>
 
           <div className="form-group">
-            <label>Title</label>
-            <input
-              type="text"
-              name="title"
-              value={formData.title}
+            <label>Designation</label>
+            <select
+              name="designation"
+              value={formData.designation}
               onChange={handleChange}
-            />
+            >
+              <option value="">Select Designation</option>
+              {designationOptions.map(option => (
+                <option key={option} value={option}>{option}</option>
+              ))}
+            </select>
           </div>
 
           <div className="form-group">
             <label>Department</label>
-            <input
-              type="text"
+            <select
               name="department"
               value={formData.department}
               onChange={handleChange}
-            />
+            >
+              <option value="">Select Department</option>
+              {departmentOptions.map(option => (
+                <option key={option} value={option}>{option}</option>
+              ))}
+            </select>
           </div>
 
           <div className="form-group">
